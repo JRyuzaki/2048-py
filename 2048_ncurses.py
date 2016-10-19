@@ -10,7 +10,7 @@ from pathlib import Path
 from Gamefield2048 import Gamefield
 
 
-gamefieldSize = 3
+gamefieldSize = 4 
 blockSize = 6
 
 winningString = ["__  __                                   ", "\ \/ /___  __  __   _      ______  ____  ", " \  / __ \/ / / /  | | /| / / __ \/ __ \ ", " / / /_/ / /_/ /   | |/ |/ / /_/ / / / / ", "/_/\____/\__,_/    |__/|__/\____/_/ /_/  "]
