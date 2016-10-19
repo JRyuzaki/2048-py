@@ -39,6 +39,7 @@ def writeHighscore(score):
 def initializeCurses():
 	global stdscr
 	stdscr = curses.initscr()
+	stdscr.keypad(1)
 	
 	curses.noecho()
 	curses.cbreak()
@@ -193,24 +194,20 @@ while gameRunning:
 
 	try:
 		userInputCode = stdscr.getch()
-		if userInputCode > 127:
-			continue
-
-		userInput = str(chr(userInputCode))
 	except:
 		gameRunning = False
 		break
 
 	newGamefield = None
-	if userInput == "s":
+	if userInputCode == ord("s") or userInputCode == curses.KEY_DOWN:
 		newGamefield = possibleNextMoves[1]
-	elif userInput == "w":
+	elif userInputCode == ord("w") or userInputCode == curses.KEY_UP:
 		newGamefield = possibleNextMoves[0]
-	elif userInput == "d":
+	elif userInputCode == ord("d") or userInputCode == curses.KEY_RIGHT:
 		newGamefield = possibleNextMoves[3]
-	elif userInput == "a":
+	elif userInputCode == ord("a") or userInputCode == curses.KEY_LEFT:
 		newGamefield = possibleNextMoves[2]
-	elif userInput == "q":
+	elif userInputCode == ord("q"):
 		gameRunning = False
 	else:
 		continue
