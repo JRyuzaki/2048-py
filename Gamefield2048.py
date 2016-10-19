@@ -24,7 +24,7 @@ class Gamefield:
 		return False
 	
 	def mergeBlocksHorizontally(self, direction=0):
-		newGamefield = copy.deepcopy(self.gamefield)
+		newGamefield = copy.deepcopy(self)
 		for y in range(0, self.gamefieldSize):
 			basePointer = 0
 			xCoordinates = range(1, self.gamefieldSize)
@@ -35,29 +35,29 @@ class Gamefield:
 				xCoordinates = range(self.gamefieldSize - 2, -1, -1)
 			
 			for x in xCoordinates:
-				currentBlockValue = newGamefield[x][y]
+				currentBlockValue = newGamefield.gamefield[x][y]
 				if currentBlockValue != 0:
-					baseBlockValue = newGamefield[basePointer][y]
+					baseBlockValue = newGamefield.gamefield[basePointer][y]
 					if baseBlockValue == 0:
-						newGamefield[basePointer][y] = currentBlockValue
-						newGamefield[x][y] = 0
+						newGamefield.gamefield[basePointer][y] = currentBlockValue
+						newGamefield.gamefield[x][y] = 0
 					else:
 						if baseBlockValue == currentBlockValue:
-							newGamefield[basePointer][y] = currentBlockValue * 2
-							newGamefield[x][y] =  0
-							self.score = self.score + currentBlockValue * 2
+							newGamefield.gamefield[basePointer][y] = currentBlockValue * 2
+							newGamefield.gamefield[x][y] =  0
+							newGamefield.score = newGamefield.score + currentBlockValue * 2
 						else:
 							if(direction == 0):
 								basePointer = basePointer + 1
 							else:
 								basePointer = basePointer - 1
 							if(basePointer != x):
-								newGamefield[basePointer][y] = currentBlockValue
-								newGamefield[x][y] = 0
+								newGamefield.gamefield[basePointer][y] = currentBlockValue
+								newGamefield.gamefield[x][y] = 0
 		return newGamefield 
 
 	def mergeBlocksVertically(self, direction=0):
-		newGamefield = copy.deepcopy(self.gamefield)
+		newGamefield = copy.deepcopy(self)
 
 		for y in range(0, self.gamefieldSize):
 			basePointer = 0
@@ -69,25 +69,25 @@ class Gamefield:
 				xCoordinates = range(self.gamefieldSize - 2, -1, -1)
 			
 			for x in xCoordinates:
-				currentBlockValue = newGamefield[y][x]
+				currentBlockValue = newGamefield.gamefield[y][x]
 				if currentBlockValue != 0:
-					baseBlockValue = newGamefield[y][basePointer]
+					baseBlockValue = newGamefield.gamefield[y][basePointer]
 					if baseBlockValue == 0:
-						newGamefield[y][basePointer] = currentBlockValue
-						newGamefield[y][x] = 0
+						newGamefield.gamefield[y][basePointer] = currentBlockValue
+						newGamefield.gamefield[y][x] = 0
 					else:
 						if baseBlockValue == currentBlockValue:
-							newGamefield[y][basePointer] = currentBlockValue * 2
-							newGamefield[y][x] = 0
-							self.score = self.score + currentBlockValue * 2
+							newGamefield.gamefield[y][basePointer] = currentBlockValue * 2
+							newGamefield.gamefield[y][x] = 0
+							newGamefield.score = newGamefield.score + currentBlockValue * 2
 						else:
 							if(direction == 0):
 								basePointer = basePointer + 1
 							else:
 								basePointer = basePointer - 1
 							if(basePointer != x):
-								newGamefield[y][basePointer] = currentBlockValue
-								newGamefield[y][x] = 0
+								newGamefield.gamefield[y][basePointer] = currentBlockValue
+								newGamefield.gamefield[y][x] = 0
 		return newGamefield
 
 	def compareGamefields(self, other):
