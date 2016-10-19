@@ -88,7 +88,14 @@ def displayCursesGamefield():
 					stdscr.addstr(y * blockSize + i + y + 1, x * blockSize * 3 + 2, centerStringToSize(" ", blockSize * 3 - 2), curses.color_pair(colorCode))
 				else:
 					stdscr.addstr(y * blockSize + i + y + 1, x * blockSize * 3 + 2, centerStringToSize(str(fieldValue), blockSize * 3 - 2), curses.color_pair(colorCode))
-	stdscr.addstr(minimalRequiredScreenHeight + 1, 0, "SCORE: " + str(gamefield.score) + " \t\t HIGHSCORE: " + str(highscore))
+
+	scoreString = "SCORE: " + str(gamefield.score)
+
+	if gamefield.gamefieldSize == 4:
+		scoreString = scoreString + " \t\t HIGHSCORE: " + str(highscore)	
+	
+	stdscr.addstr(minimalRequiredScreenHeight + 1, 0, scoreString)
+
 	stdscr.addstr(minimalRequiredScreenHeight + 2, 0, "Press [Q] to quit \t\t Controls: W/A/S/D")
 
 def centerStringToSize(string, size, fillChar=" "):
@@ -168,7 +175,9 @@ if minimalRequiredScreenWidth > screenWidth or minimalRequiredScreenHeight > scr
 gamefield = Gamefield(gamefieldSize)
 randomlyInitializeGamefield(2)
 
-readHighscore()
+
+if gamefield.gamefieldSize == 4:
+	readHighscore()
 
 gameRunning = True
 gameWon = False
@@ -227,7 +236,7 @@ while gameRunning:
 		blockValue = 4
 	gamefield.addNewBlockAtRandomPosition(blockValue)
 
-	if gamefield.score > highscore:
+	if gamefield.gamefieldSize == 4 and gamefield.score > highscore:
 		highscore = gamefield.score
 		writeHighscore(highscore)
 	
