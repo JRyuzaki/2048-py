@@ -165,8 +165,6 @@ if minimalRequiredScreenWidth > screenWidth or minimalRequiredScreenHeight > scr
 	sys.exit("Size of terminal is too small for this size of gamefield\nTry again with a smaller one")
 
 gamefield = Gamefield(gamefieldSize)
-gamefield.gamefield[0][0] = 1024
-gamefield.gamefield[0][1] = 1024
 randomlyInitializeGamefield(2)
 
 readHighscore()
