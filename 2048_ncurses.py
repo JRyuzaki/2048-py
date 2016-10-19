@@ -183,15 +183,13 @@ while gameRunning:
 	possibleNextMoves = [gamefield.mergeBlocksVertically(), gamefield.mergeBlocksVertically(1), gamefield.mergeBlocksHorizontally(), gamefield.mergeBlocksHorizontally(1)]
 	amountOfValidNextMoves = len(possibleNextMoves)
 	for i in range(0, len(possibleNextMoves)):
-		if Gamefield.compareGamefields(gamefield.gamefield, possibleNextMoves[i]):
+		if Gamefield.compareGamefields(gamefield.gamefield, possibleNextMoves[i].gamefield):
 			possibleNextMoves[i] = None 
 			amountOfValidNextMoves = amountOfValidNextMoves - 1
 
 	if amountOfValidNextMoves == 0:	
 		displayDialogue(gameoverString, 9)
 		break
-
-	stdscr.refresh()
 
 	try:
 		userInputCode = stdscr.getch()
@@ -220,7 +218,7 @@ while gameRunning:
 	if newGamefield == None:
 		continue
 
-	gamefield.gamefield = newGamefield
+	gamefield = newGamefield
 	
 	if not gameWon:
 		gameWon = isGameWon()
@@ -235,4 +233,6 @@ while gameRunning:
 	if gamefield.score > highscore:
 		highscore = gamefield.score
 		writeHighscore(highscore)
+	
+	stdscr.refresh()
 endCurses()
